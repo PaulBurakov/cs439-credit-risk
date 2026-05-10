@@ -1,0 +1,56 @@
+# Credit Risk Default Prediction
+
+CS 439 Final Project — Rutgers University
+
+## Overview
+
+A hybrid machine learning pipeline for predicting credit loan defaults, combining unsupervised K-Means borrower segmentation with three supervised classifiers: Logistic Regression, Random Forest, and XGBoost.
+
+## Results
+
+| Model | Accuracy | AUC-ROC | F1 Score |
+|---|---|---|---|
+| Logistic Regression | 0.650 | **0.703** | 0.583 |
+| Random Forest | 0.660 | 0.702 | 0.528 |
+| XGBoost | **0.665** | 0.692 | **0.599** |
+
+## Project Structure
+
+```
+credit-risk-project/
+├── data/
+│   └── credit_data.csv        # German Credit-style dataset (1000 samples)
+├── src/
+│   ├── preprocess.py          # Data loading and preprocessing pipeline
+│   ├── train.py               # Model training and evaluation
+│   └── visualize.py           # All figures (ROC, SHAP, PCA, etc.)
+├── figures/                   # Generated visualizations
+├── models/                    # Saved model checkpoints (.pkl)
+├── main.py                    # Full pipeline runner
+└── README.md
+```
+
+## Quickstart
+
+```bash
+# Install dependencies
+pip install pandas numpy scikit-learn xgboost shap matplotlib seaborn imbalanced-learn
+
+# Run full pipeline
+python main.py
+```
+
+This will reproduce all results and save figures to `figures/` and models to `models/`.
+
+## Pipeline
+
+1. **Preprocessing** — one-hot encoding, StandardScaler (fit on train only), stratified split
+2. **K-Means Segmentation** — 4 borrower clusters appended as feature (hybrid pipeline)
+3. **Model Training** — Logistic Regression, Random Forest, XGBoost
+4. **Evaluation** — Accuracy, AUC-ROC, F1, confusion matrices
+5. **Visualization** — ROC curves, SHAP values, feature importance, PCA cluster projection
+
+## Dependencies
+
+- Python 3.9+
+- scikit-learn, xgboost, shap, pandas, numpy, matplotlib, seaborn, imbalanced-learn
